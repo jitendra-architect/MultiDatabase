@@ -7,6 +7,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -19,32 +20,31 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackages = "com.example.MultiDatabase.config.mysql", // Replace with your MySQL repository package
-        entityManagerFactoryRef = "mysqlEntityManagerFactory",
-        transactionManagerRef = "mysqlTransactionManager"
+        entityManagerFactoryRef = "mysql2EntityManagerFactory",
+        transactionManagerRef = "mysql2TransactionManager"
 )
+public class MySQL2DatabaseConfig {
 
-public class MySQL1DatabaseConfig  {
-
-    @Bean(name = "mysql1DataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.mysql1")
+    @Bean(name = "mysql2DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.mysql2")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "mysql1EntityManagerFactory")
+    @Bean(name = "mysql2EntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             EntityManagerFactoryBuilder builder,
-            @Qualifier("mysql1DataSource") DataSource dataSource) {
+            @Qualifier("mysql2DataSource") DataSource dataSource) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.example.entity.mysql1") // Replace with your MySQL entity package
-                .persistenceUnit("mysql1")
+                .packages("com.example.entity.mysql2") // Replace with your MySQL entity package
+                .persistenceUnit("mysql2")
                 .build();
     }
 
-    @Bean(name = "mysql1TransactionManager")
+    @Bean(name = "mysql2TransactionManager")
     public PlatformTransactionManager transactionManager(
-            @Qualifier("mysql1EntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+            @Qualifier("mysql2EntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

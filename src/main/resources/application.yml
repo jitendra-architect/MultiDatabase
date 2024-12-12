@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    mysql1:
+      url: jdbc:mysql://localhost:3306/mysql_db1
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    mysql2:
+      url: jdbc:mysql://localhost:3306/mysql_db2
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    postgres:
+      url: jdbc:postgresql://localhost:5432/postgres_db
+      username: postgres
+      password: root
+      driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mongodb:
+    uri: mongodb://localhost:27017/mongo_db
