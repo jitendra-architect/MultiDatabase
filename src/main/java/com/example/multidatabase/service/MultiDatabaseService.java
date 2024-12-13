@@ -1,13 +1,13 @@
-package com.example.MultiDatabase.service;
+package com.example.multidatabase.service;
 
-import com.example.MultiDatabase.config.CacheManagerLogger;
-import com.example.MultiDatabase.entity.MongoEntity;
-import com.example.MultiDatabase.entity.MySQLEntity;
-import com.example.MultiDatabase.entity.PostgresEntity;
-import com.example.MultiDatabase.repository.MyMongoRepository;
-import com.example.MultiDatabase.repository.MySQL1Repository;
-import com.example.MultiDatabase.repository.MySQL2Repository;
-import com.example.MultiDatabase.repository.PostgresRepository;
+import com.example.multidatabase.utils.CacheManagerLogger;
+import com.example.multidatabase.entity.MongoEntity;
+import com.example.multidatabase.entity.MySQLEntity;
+import com.example.multidatabase.entity.PostgresEntity;
+import com.example.multidatabase.repository.MyMongoRepository;
+import com.example.multidatabase.repository.MySQL1Repository;
+import com.example.multidatabase.repository.MySQL2Repository;
+import com.example.multidatabase.repository.PostgresRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,21 +17,22 @@ public class MultiDatabaseService {
     private final MySQL2Repository mysql2Repository;
     private final PostgresRepository postgresRepository;
     private final MyMongoRepository mongoRepository;
+    private final CacheManagerLogger cacheManagerLogger;
 
     public MultiDatabaseService(MySQL1Repository mysql1Repository,
                                 MySQL2Repository mysql2Repository,
                                 PostgresRepository postgresRepository,
-                                MyMongoRepository mongoRepository) {
+                                MyMongoRepository mongoRepository,
+                                CacheManagerLogger cacheManagerLogger) {
         this.mysql1Repository = mysql1Repository;
         this.mysql2Repository = mysql2Repository;
         this.postgresRepository = postgresRepository;
         this.mongoRepository = mongoRepository;
-
-        CacheManagerLogger logger = new CacheManagerLogger();
-        logger.logCacheManager();
+        this.cacheManagerLogger = cacheManagerLogger;
     }
 
     public void saveToMySQL1(MySQLEntity entity) {
+        cacheManagerLogger.logCacheManager();
         mysql1Repository.save(entity);
     }
 

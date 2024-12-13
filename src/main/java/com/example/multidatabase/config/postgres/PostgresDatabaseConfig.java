@@ -1,4 +1,4 @@
-package com.example.MultiDatabase.config.postgres;
+package com.example.multidatabase.config.postgres;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.example.MultiDatabase.config.postgres", // Replace with your PostgreSQL repository package
+        basePackages = "com.example.multidatabase.config.postgres", // Replace with your PostgreSQL repository package
         entityManagerFactoryRef = "postgresEntityManagerFactory",
         transactionManagerRef = "postgresTransactionManager"
 )

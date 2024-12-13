@@ -1,4 +1,4 @@
-package com.example.MultiDatabase.entity;
+package com.example.multidatabase.entity;
 
 import jakarta.persistence.*;
 

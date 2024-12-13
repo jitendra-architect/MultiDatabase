@@ -1,4 +1,4 @@
-package com.example.MultiDatabase.config.mysql;
+package com.example.multidatabase.config.mysql;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.example.MultiDatabase.config.mysql", // Replace with your MySQL repository package
+        basePackages = "com.example.multidatabase.config.mysql", // Replace with your MySQL repository package
         entityManagerFactoryRef = "mysql1EntityManagerFactory",
         transactionManagerRef = "mysql1TransactionManager"
 )
