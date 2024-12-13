@@ -1,5 +1,6 @@
 package com.example.MultiDatabase.service;
 
+import com.example.MultiDatabase.config.CacheManagerLogger;
 import com.example.MultiDatabase.entity.MongoEntity;
 import com.example.MultiDatabase.entity.MySQLEntity;
 import com.example.MultiDatabase.entity.PostgresEntity;
@@ -25,6 +26,9 @@ public class MultiDatabaseService {
         this.mysql2Repository = mysql2Repository;
         this.postgresRepository = postgresRepository;
         this.mongoRepository = mongoRepository;
+
+        CacheManagerLogger logger = new CacheManagerLogger();
+        logger.logCacheManager();
     }
 
     public void saveToMySQL1(MySQLEntity entity) {
